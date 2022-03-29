@@ -3,10 +3,7 @@ package edu.poniperro;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotEquals;
-import static org.junit.Assert.assertTrue;
 
-import edu.poniperro.NumeroRomano;
-import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class NumeroRomanoTest {
