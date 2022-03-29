@@ -24,7 +24,7 @@ public class NumeroRomano {
         this.valorDecimal = valorDecimal;
     }
 
-    public Integer toDecimal() {
+    public int toDecimal() {
         if (valorDecimal.isEmpty()) {
             setValorDecimal(Optional.of(calcularValorDecimal()));
         }
