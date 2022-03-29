@@ -1,35 +1,52 @@
 package edu.poniperro;
 
-import java.util.Arrays;
-import java.util.HashMap;
 import java.util.Optional;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class NumeroRomano {
 
-    private String numeroRomano;
-    private HashMap regexDiccionario;
+    private final String numeroRomano;
+    private Optional<Integer> valorDecimal;
+    private RegexNumeroRomanos regex;
 
-    public NumeroRomano() {
+    public NumeroRomano(String numeroRomano) {
+        this.valorDecimal = Optional.empty();
+        this.numeroRomano = numeroRomano;
+        this.regex = new RegexNumeroRomanos();
     }
 
     public String getNumeroRomano() {
         return this.numeroRomano;
     }
 
-    public void setNumeroRomano(String numeroRomano) {
-        this.numeroRomano = numeroRomano;
+    private void setValorDecimal(Optional<Integer> valorDecimal) {
+        this.valorDecimal = valorDecimal;
     }
 
-    public int toDecimal() {
-        Optional<Integer> suma = Arrays.stream(SimbolosRomanos.values())
-                .filter(s -> s.validacion(getNumeroRomano()))
-                .map(s -> s.getValor())
-                .reduce(Integer::sum);
-        return suma.isPresent() ? suma.get() : 0;
+    public Integer toDecimal() {
+        if (valorDecimal.isEmpty()) {
+            setValorDecimal(Optional.of(calcularValorDecimal()));
+        }
+        return valorDecimal.get();
     }
 
-    public void initRegexDicionario() {
-        this.regexDiccionario = new HashMap<>();
+    private Integer calcularValorDecimal() {
+        Integer valor = 0;
+        Matcher matcher = crearMatcher();
+        while (matcher.find()) {
+            valor += decimalValor(matcher.group());
+        }
+        return valor;
+    }
+
+    private Integer decimalValor(String simbolo) {
+        return SimbolosRomanos.valorNumerico(simbolo);
+    }
+
+    private Matcher crearMatcher() {
+        Pattern pattern = Pattern.compile(regex.getRegex());
+        return pattern.matcher(getNumeroRomano());
     }
 
 }

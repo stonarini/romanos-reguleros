@@ -11,14 +11,6 @@ import org.junit.Test;
 
 public class NumeroRomanoTest {
 
-    public static NumeroRomano numeroRomano;
-
-    @BeforeClass
-    public static void setup() {
-        numeroRomano = new NumeroRomano();
-        numeroRomano.initRegexDicionario();
-    }
-
     /**
      * Grupos sumatorios M, C, X, I
      */
@@ -27,20 +19,20 @@ public class NumeroRomanoTest {
     public void grupo_M_test() {
 
         String testCase = "M";
-        numeroRomano.setNumeroRomano(testCase);
-        assertEquals(1000, numeroRomano.toDecimal());
+        NumeroRomano numeroRomano = new NumeroRomano(testCase);
+        assertEquals(1000, numeroRomano.toDecimal(), 0);
 
         testCase = "UMMU";
-        numeroRomano.setNumeroRomano(testCase);
-        assertEquals(2000, numeroRomano.toDecimal());
+        numeroRomano = new NumeroRomano(testCase);
+        assertEquals(2000, numeroRomano.toDecimal(), 0);
 
         testCase = "UMMMU";
-        numeroRomano.setNumeroRomano(testCase);
-        assertEquals(3000, numeroRomano.toDecimal());
+        numeroRomano = new NumeroRomano(testCase);
+        assertEquals(3000, numeroRomano.toDecimal(), 0);
 
         testCase = "UCMU";
-        numeroRomano.setNumeroRomano(testCase);
-        assertNotEquals(1000, numeroRomano.toDecimal());
+        numeroRomano = new NumeroRomano(testCase);
+        assertNotEquals(1000, numeroRomano.toDecimal(), 0);
 
         /**
          * El caso MMMM es control de errores
@@ -54,38 +46,38 @@ public class NumeroRomanoTest {
     public void tres_repeticiones_C_test() {
 
         String testCase = "UMMMUCCCU";
-        numeroRomano.setNumeroRomano(testCase);
-        assertEquals(3300, numeroRomano.toDecimal());
+        NumeroRomano numeroRomano = new NumeroRomano(testCase);
+        assertEquals(3300, numeroRomano.toDecimal(), 0);
     }
 
     @Test
     public void tres_repeticiones_X_test() {
 
         String testCase = "UMMMUXXXU";
-        numeroRomano.setNumeroRomano(testCase);
+        NumeroRomano numeroRomano = new NumeroRomano(testCase);
 
-        assertEquals(3030, numeroRomano.toDecimal());
+        assertEquals(3030, numeroRomano.toDecimal(), 0);
     }
 
     @Test
     public void tres_repeticiones_I_test() {
 
         String testCase = "UMMMUIIIU";
-        numeroRomano.setNumeroRomano(testCase);
+        NumeroRomano numeroRomano = new NumeroRomano(testCase);
 
-        assertEquals(3003, numeroRomano.toDecimal());
+        assertEquals(3003, numeroRomano.toDecimal(), 0);
     }
 
     @Test
     public void una_D_test() {
 
         String testCase = "UMMMUDUIIIU";
-        numeroRomano.setNumeroRomano(testCase);
-        assertEquals(3503, numeroRomano.toDecimal());
+        NumeroRomano numeroRomano = new NumeroRomano(testCase);
+        assertEquals(3503, numeroRomano.toDecimal(), 0);
 
         testCase = "MMMUCDUIIIU";
-        numeroRomano.setNumeroRomano(testCase);
-        assertNotEquals(3503, numeroRomano.toDecimal());
+        numeroRomano = new NumeroRomano(testCase);
+        assertNotEquals(3503, numeroRomano.toDecimal(), 0);
     }
 
     /**
@@ -99,61 +91,61 @@ public class NumeroRomanoTest {
     public void grupo_C_DM_test() {
 
         String testCase = "UCDU";
-        numeroRomano.setNumeroRomano(testCase);
-        assertEquals(400, numeroRomano.toDecimal());
+        NumeroRomano numeroRomano = new NumeroRomano(testCase);
+        assertEquals(400, numeroRomano.toDecimal(), 0);
 
         testCase = "UCMU";
-        numeroRomano.setNumeroRomano(testCase);
-        assertEquals(900, numeroRomano.toDecimal());
+        numeroRomano = new NumeroRomano(testCase);
+        assertEquals(900, numeroRomano.toDecimal(), 0);
     }
 
     @Test
     public void grupo_X_LC_test() {
 
         String testCase = "UXLU";
-        numeroRomano.setNumeroRomano(testCase);
-        assertEquals(40, numeroRomano.toDecimal());
+        NumeroRomano numeroRomano = new NumeroRomano(testCase);
+        assertEquals(40, numeroRomano.toDecimal(), 0);
 
         testCase = "UXCU";
-        numeroRomano.setNumeroRomano(testCase);
-        assertEquals(90, numeroRomano.toDecimal());
+        numeroRomano = new NumeroRomano(testCase);
+        assertEquals(90, numeroRomano.toDecimal(), 0);
     }
 
     @Test
     public void grupo_I_VX_test() {
 
         String testCase = "UIVU";
-        numeroRomano.setNumeroRomano(testCase);
-        assertEquals(4, numeroRomano.toDecimal());
+        NumeroRomano numeroRomano = new NumeroRomano(testCase);
+        assertEquals(4, numeroRomano.toDecimal(), 0);
 
         testCase = "UIXU";
-        numeroRomano.setNumeroRomano(testCase);
-        assertEquals(9, numeroRomano.toDecimal());
+        numeroRomano = new NumeroRomano(testCase);
+        assertEquals(9, numeroRomano.toDecimal(), 0);
     }
 
     @Test
     public void grupos_sumatorios_tres_digitos_test() {
-        String test = "MMMDCCCLXXXVIII"; // 3888
-        numeroRomano.setNumeroRomano(test);
-        assertEquals(3888, numeroRomano.toDecimal());
+        String testCase = "MMMDCCCLXXXVIII"; // 3888
+        NumeroRomano numeroRomano = new NumeroRomano(testCase);
+        assertEquals(3888, numeroRomano.toDecimal(), 0);
     }
 
     @Test
     public void grupos_sumatorios_test() {
-        String test = "MMDCCLXXVII"; // 2777
-        numeroRomano.setNumeroRomano(test);
-        assertEquals(2777, numeroRomano.toDecimal());
+        String testCase = "MMDCCLXXVII"; // 2777
+        NumeroRomano numeroRomano = new NumeroRomano(testCase);
+        assertEquals(2777, numeroRomano.toDecimal(), 0);
     }
 
     @Test
     public void grupos_substractivos_test() {
-        String test = "CDXLIV"; // 444
-        numeroRomano.setNumeroRomano(test);
-        assertEquals(444, numeroRomano.toDecimal());
+        String testCase = "CDXLIV"; // 444
+        NumeroRomano numeroRomano = new NumeroRomano(testCase);
+        assertEquals(444, numeroRomano.toDecimal(), 0);
 
-        test = "CDXXXIX"; // 439
-        numeroRomano.setNumeroRomano(test);
-        assertEquals(439, numeroRomano.toDecimal());
+        testCase = "CDXXXIX"; // 439
+        numeroRomano = new NumeroRomano(testCase);
+        assertEquals(439, numeroRomano.toDecimal(), 0);
     }
 
     // @Test

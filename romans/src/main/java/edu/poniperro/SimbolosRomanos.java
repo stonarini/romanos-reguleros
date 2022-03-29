@@ -1,10 +1,5 @@
 package edu.poniperro;
 
-import java.util.Arrays;
-import java.util.Optional;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-
 public enum SimbolosRomanos {
     I(1),
     IV(4),
@@ -30,17 +25,7 @@ public enum SimbolosRomanos {
         return this.valor;
     }
 
-    private String simboloAnterior() {
-        return SimbolosRomanos.values()[this.ordinal() - 1 < 0 ? SimbolosRomanos.values().length - 1
-                : this.ordinal() - 1]
-                .name();
+    public static Integer valorNumerico(String simbolo) {
+        return Enum.valueOf(SimbolosRomanos.class, simbolo).getValor();
     }
-
-    public boolean validacion(String numeroRomano) {
-        String regex = String.format("(?<!%s)%s{1,3}", simboloAnterior(), this.name());
-        Pattern pattern = Pattern.compile(regex);
-        Matcher matcher = pattern.matcher(numeroRomano);
-        return matcher.find();
-    }
-
 }

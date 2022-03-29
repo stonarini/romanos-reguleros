@@ -1,16 +1,23 @@
 package edu.poniperro;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.regex.Pattern;
-
 public class RegexNumeroRomanos {
 
-    // private final Map<String, Pattern> regexDiccionario;
+    private String regex;
 
-    // public RegexNumeroRomanos() {
-    // Map<String, Pattern> diccionario = Map.of(
-    // "M", Pattern.compile("M"));
+    public RegexNumeroRomanos() {
+        this.initRegex();
+    }
 
-    // }
+    public String getRegex() {
+        return this.regex;
+    }
+
+    public void setRegex(String regex) {
+        this.regex = regex;
+    }
+
+    private void initRegex() {
+        setRegex("I[XV]|X[CL]|C[MD]|[MCDLXVI]");
+    }
+
 }
